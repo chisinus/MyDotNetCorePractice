@@ -47,7 +47,7 @@ namespace MyWebApi.Controllers
         [Route("testpostinswagger")]
         public IActionResult TestPostInSwagger(string username, string password)
         {
-            return O k();
+            return Ok();
         }
     }
 }
