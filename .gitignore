@@ -1,2 +1,5 @@
 MyWebApi/obj/
 .vs/
+/MyWebApi/bin/Debug/net6.0
+MyMVCProject/bin/
+MyMVCProject/obj/

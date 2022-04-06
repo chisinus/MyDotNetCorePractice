@@ -17,30 +17,30 @@ namespace MyWebApi.Controllers
 
         [HttpGet]
         [Route("testget")]
-        public IActionResult TestGet()
+        public async Task<IEnumerable<string>> TestGet()
         {
-            return Ok(service.TestGet());
+            return await Task.FromResult(service.TestGet());
         }
 
         [HttpGet]
         [Route("testinsert")]
-        public IActionResult TestInsert()
+        public async Task<string> TestInsert()
         {
-            return Ok(service.TestInsert("new company"));
+            return await service.TestInsert("new company");
         }
 
         [HttpGet]
         [Route("testdelete")]
-        public IActionResult TestDelete()
+        public async Task<string> TestDelete()
         {
-            return Ok(service.TestDelete());
+            return await service.TestDelete();
         }
 
         [HttpGet]
         [Route("testupdate")]
-        public IActionResult TestUpdate()
+        public async Task<string> TestUpdate()
         {
-            return Ok(service.TestUpdate());
+            return await service.TestUpdate();
         }
 
         [HttpPost]

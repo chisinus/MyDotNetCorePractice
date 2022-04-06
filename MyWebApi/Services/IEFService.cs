@@ -3,8 +3,8 @@
     public interface IEFService
     {
         IEnumerable<string> TestGet();
-        string TestInsert(string companyName);
-        string TestUpdate();
-        string TestDelete();
+        Task<string> TestInsert(string companyName);
+        Task<string> TestUpdate();
+        Task<string> TestDelete();
     }
 }

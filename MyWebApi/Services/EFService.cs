@@ -1,4 +1,5 @@
-﻿using MyWebApi.FBEntities;
+﻿using Microsoft.EntityFrameworkCore;
+using MyWebApi.FBEntities;
 using MyWebApi.Models;
 
 namespace MyWebApi.Services
@@ -13,11 +14,11 @@ namespace MyWebApi.Services
             this.fbContext = fbContext;
         }
 
-        public string TestDelete()
+        public async Task<string> TestDelete()
         {
-            string companyName = TestInsert("company to be deleted");
+            string companyName = TestInsert("company to be deleted").Result;
 
-            DeleteCompany(id);
+            await DeleteCompany(id);
 
             var company = GetCompanyList(id);
             if (company == null)
@@ -30,10 +31,10 @@ namespace MyWebApi.Services
 
         public IEnumerable<string> TestGet()
         {
-            return GetCompanyList();
+            return GetCompanyList().Result;
         }
 
-        public string TestInsert(string companyName)
+        public async Task<string> TestInsert(string companyName)
         {
             TblCompany company = new TblCompany
             {
@@ -44,36 +45,37 @@ namespace MyWebApi.Services
             };
 
             fbContext.TblCompanies.Add(company);
-            fbContext.SaveChanges();
+            await fbContext.SaveChangesAsync();
 
             id = company.CompanyId;
 
-            return GetCompanyList(id).First();
+            return GetCompanyList(id).Result.First();
         }
 
-        public string TestUpdate()
+        public async Task<string> TestUpdate()
         {
-            string companyName = TestInsert("company to be updated");
+            string companyName = TestInsert("company to be updated").Result;
 
-            var company = fbContext.TblCompanies.Where(c => c.CompanyId == id).First();
+            var company = await fbContext.TblCompanies
+                                    .Where(c => c.CompanyId == id).FirstAsync();
             company.CompanyName = "new company name";
-            fbContext.SaveChanges();
+            await fbContext.SaveChangesAsync();
 
-            return GetCompanyList(id).First();
+            return GetCompanyList(id).Result.First();
         }
 
-        private IEnumerable<string> GetCompanyList(int companyID = 0)
+        private async Task<IEnumerable<string>> GetCompanyList(int companyID = 0)
         {
-            return fbContext.TblCompanies
-                    .Where(c=>companyID == 0 || c.CompanyId == companyID)
-                    .Select(c => c.CompanyName).ToList();
+            return await fbContext.TblCompanies
+                            .Where(c=>companyID == 0 || c.CompanyId == companyID)
+                            .Select(c => c.CompanyName).ToListAsync();
         }
 
-        private void DeleteCompany(int companID)
+        private async Task DeleteCompany(int companID)
         {
             var company = fbContext.TblCompanies.Where(c => c.CompanyId == id).First();
             fbContext.TblCompanies.Remove(company);
-            fbContext.SaveChanges();
+            await fbContext.SaveChangesAsync();
         }
     }
 }
