@@ -1,9 +1,26 @@
 ﻿using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MyWebApi.Models;
 
 namespace MyWebApi.Services
 {
+    /* Prepare data
+        db.Books.insertOne({ "Name": "Design Patterns", "Price": 54.93, "Category": "Computers", "Author": "Ralph Johnson", "PublishDate" :   ISODate("2020-01-01T00:00:00Z")})
+
+        db.Books.insertMany([{ "Name": "Clean Code", "Price": 43.15, "Category": "Computers", "Author": "Robert C. Martin", "PublishDate" :  ISODate("2020-01-02T00:00:00Z")}])
+
+
+        Insert Body:
+
+            {
+            "BookName": "Book1",
+            "Price": 1,
+            "Category": "Misc",
+            "Author": "Jun Xia",
+            "PublishDate": "2022-04-09T20:10:47.865Z"
+        }    
+    */
     public class MyMongoDBService : IMyMongoDBService
     {
         private readonly IMongoCollection<Book> _booksCollection;
@@ -27,7 +44,7 @@ namespace MyWebApi.Services
             return await _booksCollection.FindAsync(b => b.Id == id).Result.FirstOrDefaultAsync();
         }
 
-        public async Task<string> InsertBook(string bookName, decimal price, string category, string author, string publishDate)
+        public async Task<string> InsertBook(string bookName, decimal price, string category, string author, DateTime publishDate)
         {
             Book newBook = new Book { BookName = bookName, Price = price, Category = category, Author = author, PublishDate = publishDate };
             await _booksCollection.InsertOneAsync(newBook);
@@ -46,7 +63,7 @@ namespace MyWebApi.Services
             //// replace replace whole document
 
             // update field/fields
-            var filter = Builders<Book>.Filter.Eq(b => b.Id == id, true);
+            var filter = Builders<Book>.Filter.Eq("_id", ObjectId.Parse(id));
             var update = Builders<Book>.Update.Set(b=>b.BookName, bookName);
             
             return await _booksCollection.UpdateOneAsync(filter, update);
@@ -54,7 +71,8 @@ namespace MyWebApi.Services
 
         public async Task<DeleteResult> DeleteBook(string id)
         {
-            return await _booksCollection.DeleteOneAsync(id);
+            var filter = Builders<Book>.Filter.Eq("_id", ObjectId.Parse(id));
+            return await _booksCollection.DeleteOneAsync(filter);
         }
     }
 }

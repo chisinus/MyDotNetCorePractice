@@ -22,9 +22,8 @@ namespace MyWebApi.Models
         public string Author { get; set; } = "";
 
         // alway receives converting error
-        //[BsonElement("PublishDate")]
-        //[BsonDateTimeOptions(Kind = DateTimeKind.Local, Representation = BsonType.String)]
-        //public DateTime PublishDate { get; set; }
-        public string PublishDate { get; set; }
+        [BsonElement("PublishDate")]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local, Representation = BsonType.DateTime)]
+        public DateTime PublishDate { get; set; }
     }
 }

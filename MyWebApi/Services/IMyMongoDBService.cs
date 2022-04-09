@@ -7,7 +7,7 @@ namespace MyWebApi.Services
     {
         Task<IEnumerable<Book>> GetAllBooks();
         Task<Book> GetBook(string id);
-        Task<string> InsertBook(string bookName, decimal price, string category, string author, string publishDate);
+        Task<string> InsertBook(string bookName, decimal price, string category, string author, DateTime publishDate);
         Task<UpdateResult> UpdateBookName(string id, string bookName);
         Task<DeleteResult> DeleteBook(string id);
     }
