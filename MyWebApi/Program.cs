@@ -10,6 +10,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// MongoDB
+builder.Services.Configure<MyMongoDBSettings>(builder.Configuration.GetSection("MyMongoDB"));
+builder.Services.AddSingleton<MyMongoDBService>();
+
 builder.Services.AddDbContext<FBContext>(ServiceLifetime.Scoped);
 builder.Services.AddScoped<IEFService, EFService>();
 
