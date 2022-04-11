@@ -64,16 +64,16 @@ namespace MyWebApi.Services
             return GetCompanyList(id).Result.First();
         }
 
-        private async Task<IEnumerable<string>> GetCompanyList(int companyID = 0)
+        private async Task<IEnumerable<string>> GetCompanyList(int companyId = 0)
         {
             return await fbContext.TblCompanies
-                            .Where(c=>companyID == 0 || c.CompanyId == companyID)
+                            .Where(c=>companyId == 0 || c.CompanyId == companyId)
                             .Select(c => c.CompanyName).ToListAsync();
         }
 
-        private async Task DeleteCompany(int companID)
+        private async Task DeleteCompany(int companyId)
         {
-            var company = fbContext.TblCompanies.Where(c => c.CompanyId == id).First();
+            var company = fbContext.TblCompanies.Where(c => c.CompanyId == companyId).First();
             fbContext.TblCompanies.Remove(company);
             await fbContext.SaveChangesAsync();
         }

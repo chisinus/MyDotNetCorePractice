@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGrpcProject", "MyGrpcProject\MyGrpcProject.csproj", "{2D33E611-8728-411F-AFC7-7B56E68CB5FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGrpcClientProject", "MyGrpcClientProject\MyGrpcClientProject.csproj", "{B7DB574C-DF48-44E9-9F41-BE1DB3674331}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,14 @@ Global
 		{21BD2B2F-D987-4795-8561-303631D9BA66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21BD2B2F-D987-4795-8561-303631D9BA66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21BD2B2F-D987-4795-8561-303631D9BA66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D33E611-8728-411F-AFC7-7B56E68CB5FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D33E611-8728-411F-AFC7-7B56E68CB5FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D33E611-8728-411F-AFC7-7B56E68CB5FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D33E611-8728-411F-AFC7-7B56E68CB5FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7DB574C-DF48-44E9-9F41-BE1DB3674331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7DB574C-DF48-44E9-9F41-BE1DB3674331}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7DB574C-DF48-44E9-9F41-BE1DB3674331}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7DB574C-DF48-44E9-9F41-BE1DB3674331}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
